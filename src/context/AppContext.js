@@ -68,7 +68,7 @@ export const AppReducer = (state, action) => {
             action.type = "DONE";
             state.currency = action.payload;
             return {
-                ...state
+                ...state,
             }
 
         default:
@@ -83,7 +83,7 @@ const initialState = {
         {id: "Marketing", name: 'Marketing', cost: 50},
         {id: "Finance", name: 'Finance', cost: 300},
         {id: "Sales", name: 'Sales', cost: 70},
-        {id: "Human Resource", name: 'Human Resource', cost: 40},
+        {id: "HR", name: 'HR', cost: 40},
         {id: "IT", name: 'IT', cost: 500},
     ],
     currency: '£'
@@ -101,7 +101,7 @@ export const AppProvider = (props) => {
 
     if (state.expenses) {
         const totalExpenses = state.expenses.reduce((total, item) => {
-            return (total = total + item.cost);
+            return (total += item.cost);
         }, 0);
         remaining = state.budget - totalExpenses;
     }
@@ -112,8 +112,8 @@ export const AppProvider = (props) => {
                 expenses: state.expenses,
                 budget: state.budget,
                 remaining: remaining,
-                dispatch,
-                currency: state.currency
+                currency: state.currency,
+                dispatch
             }}
         >
             {props.children}
